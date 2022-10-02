@@ -1,0 +1,28 @@
+@import "./reset.css";
+
+:root {}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 200px 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar content"
+}
+
+.sidebar {
+  border: 1px solid red;
+  grid-area: sidebar;
+}
+
+.header {
+  border: 1px solid green;
+  grid-area: header;
+}
+
+.content {
+  border: 1px solid blue;
+  grid-area: content
+}
