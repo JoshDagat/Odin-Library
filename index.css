@@ -15,9 +15,82 @@ body {
 .sidebar {
   grid-area: sidebar;
   background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.sidebar form {
+  background-color: #Fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 90%;
+}
+
+fieldset {
+  border: 1px solid grey;
+  padding: 10px;
+  border-radius: 5px;
+
+}
+
+legend {
+  font-weight: bold;
+  margin: 0 auto;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 1.15rem;
 }
 
 .content {
   border: 1px solid blue;
   grid-area: content
+}
+
+input[type="number"] {
+  margin-bottom: 20px;
+}
+
+.btn-base {
+  border: none;
+}
+
+.btn-add {
+  background: rgb(234, 88, 12);
+  background: linear-gradient(45deg,
+      rgba(234, 88, 12, 1) 0%,
+      rgba(255, 168, 0, 1) 35%,
+      rgba(234, 88, 12, 1) 100%);
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: space-around;
+  margin: 24px auto 5px;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
+}
+
+.btn-add span {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #292524;
+}
+
+.btn-add img {
+  width: 25px;
+  height: 25px;
 }
