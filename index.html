@@ -11,7 +11,23 @@
 
 <body>
   <div class="sidebar">
-    <h1>My Reading List</h1>
+    <form action="#">
+      <fieldset>
+        <legend>New Book:</legend>
+        <label for="book">Title</label>
+        <input id="book" name="book" type="text">
+        <label for="author">Author</label>
+        <input id="author" name="author" type="text">
+        <label for="pages">Pages</label>
+        <input id="pages" name="pages" type="number">
+        <div class="read-radio">
+          <label for="read">Read</label>
+          <input id="read" name="read_not_read" value="read" type="radio">
+          <label for="not-read">Not Read</label>
+          <input id="not-read" name="read_not_read" value="not-read" type="radio">
+        </div>
+      </fieldset>
+    </form>
   </div>
   <main class="content">Content</main>
   <script src="./index.js"></script>
