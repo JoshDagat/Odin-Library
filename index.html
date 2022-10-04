@@ -11,7 +11,7 @@
 
 <body>
   <div class="sidebar">
-    <form action="#">
+    <form action="#" id="new-book">
       <fieldset>
         <legend>New Book:</legend>
         <div class="form-input">
@@ -27,19 +27,43 @@
           <input id="pages" name="pages" type="number">
         </div>
         <div class="form-radio">
+          <input id="read" name="status" value="read" type="radio">
           <label for="read">Read</label>
-          <input id="read" name="read_not_read" value="read" type="radio">
-          <label for="not-read">Not Read</label>
-          <input id="not-read" name="read_not_read" value="not-read" type="radio">
+          <input id="unread" name="status" value="unread" type="radio" checked>
+          <label for="unread">Unread</label>
         </div>
-        <button class="btn-base btn-add">
+        <button class="btn-base btn-add" type="submit">
           <span>Add Book</span>
           <img src="./assets/images/plus-box.svg" alt="Add button">
         </button>
       </fieldset>
     </form>
   </div>
-  <main class="content">Content</main>
+  <main class="content">
+    <div class="content-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr>
+            <td>Harry Potter</td>
+            <td>JK Rowling</td>
+            <td>500</td>
+            <td>unread</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="btn-base btn-add btn-new-entry">
+      Add Entry
+    </button>
+  </main>
   <script src="./index.js"></script>
 </body>
 
