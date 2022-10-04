@@ -1,6 +1,12 @@
 @import "./reset.css";
 
-:root {}
+:root {
+  --color-main: #fefae0;
+  --color-accent-1: #d4a373;
+  --color-accent-1-lt: #faedcd;
+  --color-accent-2: #ccd5ae;
+  --color-accent-2-lt: #e9edc9;
+}
 
 body {
   min-height: 100vh;
@@ -9,7 +15,8 @@ body {
   grid-template-rows: 200px 1fr;
   grid-template-areas:
     "sidebar content"
-    "sidebar content"
+    "sidebar content";
+  background-color: var(--color-main);
 }
 
 .sidebar {
@@ -51,10 +58,6 @@ label {
   font-size: 1.15rem;
 }
 
-.content {
-  border: 1px solid blue;
-  grid-area: content
-}
 
 input[type="number"] {
   margin-bottom: 20px;
@@ -93,4 +96,53 @@ input[type="number"] {
 .btn-add img {
   width: 25px;
   height: 25px;
+}
+
+/* Content */
+
+.content {
+  padding: 16px 40px;
+}
+
+.content-wrapper {
+  grid-area: content;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+}
+
+.content-wrapper>table {
+  margin: 100px auto;
+  grid-column: 1/5;
+  width: 100%;
+}
+
+.btn-new-entry {
+  max-width: 200px;
+  margin: 16px auto 0 0;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+td {
+  text-align: center;
+  background-color: var(--color-accent-1-lt);
+}
+
+th,
+td {
+  padding: 16px;
+  min-width: 200px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.15rem;
+}
+
+th {
+  background-color: var(--color-accent-1);
+  font-weight: bold;
 }
