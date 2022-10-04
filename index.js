@@ -1,3 +1,5 @@
+import { nanoid } from "./node_modules/nanoid/nanoid.js";
+
 const coreLibrary = [];
 const bookForm = document.querySelector("#new-book");
 
@@ -18,45 +20,74 @@ function Book(title, author, pages, status) {
 }
 
 /**
- * Adds a book to the coreLibrary array
+ * Receives an array of books and adds a new book to that array.
+ * 
+ * @params {library[]} an array of books.
  */
-function addBookToLibrary() {
+
+function addBookToLibrary(library) {
   const bookData = new FormData(bookForm);
   const newBook = new Book();
   for (const [key, value] of bookData) {
     newBook[key] = value;
   }
 
-  coreLibrary.push(newBook);
+  // Prepend with id for easy identification in updateTable
+  newBook.id = `id${nanoid()}`;
+  library.push(newBook);
 }
 
 bookForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  addBookToLibrary();
-  updateTable();
+  addBookToLibrary(coreLibrary);
+  updateTable(coreLibrary);
+  console.log(coreLibrary)
 })
 
 
 /**
- * Renders && re-renders the table upon changes to coreLibrary. 
+ * Takes an array of books and renders it in table format.
+ * 
+ * @params {library[]} an array of books. 
  */
-function updateTable() {
+function updateTable(library) {
   const tbody = document.querySelector("#table-body");
 
   while (tbody.hasChildNodes()) {
     tbody.removeChild(tbody.lastChild);
   }
 
-  coreLibrary.forEach(book => {
+  library.forEach(book => {
     const trow = document.createElement("tr");
+    trow.setAttribute("data-bookId", book.id);
 
-    Object.values(book).forEach(value => {
+    let bookData = Object.entries(book);
+
+    for (let [key, value] of bookData) {
+
+      if (key === 'id') continue;
+
       const tdata = document.createElement("td");
-      tdata.textContent = value;
+
+      if (value === 'read' || value === 'unread') {
+        const statusSlider = document.createElement('div')
+        const sliderIndicator = document.createElement('div')
+
+        sliderIndicator.classList = 'slider-indicator';
+        statusSlider.classList = `status-slider ${(value === 'read') ? 'read' : ''}`;
+
+        statusSlider.appendChild(sliderIndicator);
+
+        tdata.appendChild(statusSlider);
+      }
+
+      else {
+        tdata.textContent = value;
+      }
 
       trow.appendChild(tdata);
-    })
+    }
 
     tbody.appendChild(trow);
   })

@@ -12,7 +12,6 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 300px 1fr;
-  grid-template-rows: 200px 1fr;
   grid-template-areas:
     "sidebar content"
     "sidebar content";
@@ -26,6 +25,12 @@ body {
   align-items: center;
   justify-content: center;
   padding: 15px;
+
+  /* Desktop */
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
 }
 
 .sidebar form {
@@ -104,15 +109,14 @@ input[type="number"] {
   padding: 16px 40px;
 }
 
-.content-wrapper {
+.table-wrapper {
   grid-area: content;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
+  height: 50vh;
+  overflow: auto;
 }
 
-.content-wrapper>table {
-  margin: 100px auto;
+.table-wrapper>table {
+  margin: 0 auto;
   grid-column: 1/5;
   width: 100%;
 }
@@ -145,4 +149,29 @@ td {
 th {
   background-color: var(--color-accent-1);
   font-weight: bold;
+}
+
+.status-slider {
+  width: 50px;
+  height: 25px;
+  border: 1px solid grey;
+  border-radius: 15px;
+  background-color: pink;
+}
+
+.slider-indicator {
+  width: 23px;
+  height: 23px;
+  background-color: black;
+  border: 1px solid lightgrey;
+  border-radius: 100%;
+  transition: margin-left 0.25s ease-in-out;
+}
+
+.status-slider.read .slider-indicator {
+  margin-left: 50%;
+}
+
+.status-slider.read {
+  background-color: greenyellow;
 }

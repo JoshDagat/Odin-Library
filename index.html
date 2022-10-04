@@ -15,8 +15,8 @@
       <fieldset>
         <legend>New Book:</legend>
         <div class="form-input">
-          <label for="book">Title</label>
-          <input id="book" name="book" type="text">
+          <label for="title">Title</label>
+          <input id="title" name="title" type="text">
         </div>
         <div class="form-input">
           <label for="author">Author</label>
@@ -40,7 +40,8 @@
     </form>
   </div>
   <main class="content">
-    <div class="content-wrapper">
+    <h1>My Reading List</h1>
+    <div class="table-wrapper">
       <table>
         <thead>
           <tr>
@@ -51,20 +52,20 @@
           </tr>
         </thead>
         <tbody id="table-body">
-          <tr>
-            <td>Harry Potter</td>
-            <td>JK Rowling</td>
-            <td>500</td>
-            <td>unread</td>
-          </tr>
         </tbody>
       </table>
     </div>
     <button class="btn-base btn-add btn-new-entry">
       Add Entry
     </button>
+
+    <template id="">
+      <div class="status-slider read">
+        <div class="slider-indicator"></div>
+      </div>
+    </template>
   </main>
-  <script src="./index.js"></script>
+  <script type="module" src="./index.js"></script>
 </body>
 
 </html>
