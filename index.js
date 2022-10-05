@@ -13,10 +13,10 @@ const bookForm = document.querySelector("#new-book");
 */
 
 function Book(title, author, pages, status) {
+  this.status = status;
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.status = status;
 }
 
 /**
@@ -60,6 +60,15 @@ function updateTable() {
     const trow = document.createElement("tr");
     trow.setAttribute("data-bookId", book.id);
 
+    // Create delete button
+    const tdDelete = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.classList = "btn-delete";
+    deleteButton.addEventListener('click', () => {
+      deleteBook(book.id);
+    })
+    tdDelete.appendChild(deleteButton);
+    trow.appendChild(tdDelete);
 
     // Create the data tables for this book.
     let bookData = Object.entries(book);
@@ -88,16 +97,6 @@ function updateTable() {
       }
       trow.appendChild(tdata);
     }
-
-    // Create delete button
-    const tdDelete = document.createElement('td');
-    const deleteButton = document.createElement('button');
-    deleteButton.classList = "btn-delete";
-    deleteButton.addEventListener('click', () => {
-      deleteBook(book.id);
-    })
-    tdDelete.appendChild(deleteButton);
-    trow.appendChild(tdDelete);
 
     tbody.appendChild(trow);
   })
