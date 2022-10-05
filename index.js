@@ -1,6 +1,6 @@
 import { nanoid } from "./node_modules/nanoid/nanoid.js";
 
-const coreLibrary = [];
+let coreLibrary = [];
 const bookForm = document.querySelector("#new-book");
 
 /**
@@ -22,10 +22,9 @@ function Book(title, author, pages, status) {
 /**
  * Receives an array of books and adds a new book to that array.
  * 
- * @params {library[]} an array of books.
  */
 
-function addBookToLibrary(library) {
+function addBookToLibrary() {
   const bookData = new FormData(bookForm);
   const newBook = new Book();
   for (const [key, value] of bookData) {
@@ -34,31 +33,29 @@ function addBookToLibrary(library) {
 
   // Prepend with id for easy identification in updateTable
   newBook.id = `id${nanoid()}`;
-  library.push(newBook);
+  coreLibrary.push(newBook);
 }
 
 bookForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  addBookToLibrary(coreLibrary);
-  updateTable(coreLibrary);
-  console.log(coreLibrary)
+  addBookToLibrary();
+  updateTable();
 })
 
 
 /**
  * Takes an array of books and renders it in table format.
  * 
- * @params {library[]} an array of books. 
  */
-function updateTable(library) {
+function updateTable() {
   const tbody = document.querySelector("#table-body");
 
   while (tbody.hasChildNodes()) {
     tbody.removeChild(tbody.lastChild);
   }
 
-  library.forEach(book => {
+  coreLibrary.forEach(book => {
     // Create the row for this book.
     const trow = document.createElement("tr");
     trow.setAttribute("data-bookId", book.id);
@@ -82,30 +79,51 @@ function updateTable(library) {
         tdata.appendChild(statusSlider);
 
         statusSlider.addEventListener('click', () => {
-          toggleStatus(book.id, coreLibrary, statusSlider);
+          toggleStatus(book.id, statusSlider);
         })
       }
 
       else {
         tdata.textContent = value;
       }
-
-      // // Create delete button
-      // const tdDelete = document.createElement('td');
-      // const deleteButton = document.createElement('button');
-      // deleteButton.classList = "btn-delete";
-      // deleteButton.addEventListener('click', () => {
-      //   deleteBook();
-      // })
       trow.appendChild(tdata);
     }
+
+    // Create delete button
+    const tdDelete = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.classList = "btn-delete";
+    deleteButton.addEventListener('click', () => {
+      deleteBook(book.id);
+    })
+    tdDelete.appendChild(deleteButton);
+    trow.appendChild(tdDelete);
 
     tbody.appendChild(trow);
   })
 }
 
-function toggleStatus(id, library, node) {
-  const matchingBook = library.find(book => book.id === id);
+/**
+ *  Toggles the book's read/unread status in the coreLibrary.
+ * 
+ * @params {string} id
+ * @params {Element} the statusSlider html node 
+ */
+function toggleStatus(id, node) {
+  const matchingBook = coreLibrary.find(book => book.id === id);
   matchingBook.status = (matchingBook.status === 'read') ? 'unread' : 'read';
   node.classList.toggle('read');
+}
+
+
+/**
+ * Removes from the library the book whose id matches the parameter id passed in
+ * 
+ * @params {string} id
+ * @params {book[]} an array of books
+ **/
+function deleteBook(id) {
+  const newLibrary = coreLibrary.filter(book => book.id !== id);
+  coreLibrary = newLibrary;
+  updateTable();
 }
