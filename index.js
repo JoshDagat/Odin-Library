@@ -9,7 +9,7 @@ const bookForm = document.querySelector("#new-book");
  * @param {string} title
  * @param {string} author
  * @param {number} pages
- * @param {boolean} status
+ * @param {string} status
 */
 
 function Book(title, author, pages, status) {
@@ -59,36 +59,53 @@ function updateTable(library) {
   }
 
   library.forEach(book => {
+    // Create the row for this book.
     const trow = document.createElement("tr");
     trow.setAttribute("data-bookId", book.id);
 
-    let bookData = Object.entries(book);
 
+    // Create the data tables for this book.
+    let bookData = Object.entries(book);
     for (let [key, value] of bookData) {
 
       if (key === 'id') continue;
 
       const tdata = document.createElement("td");
-
       if (value === 'read' || value === 'unread') {
+
+        // Create a status slider.
         const statusSlider = document.createElement('div')
         const sliderIndicator = document.createElement('div')
-
         sliderIndicator.classList = 'slider-indicator';
         statusSlider.classList = `status-slider ${(value === 'read') ? 'read' : ''}`;
-
         statusSlider.appendChild(sliderIndicator);
-
         tdata.appendChild(statusSlider);
+
+        statusSlider.addEventListener('click', () => {
+          toggleStatus(book.id, coreLibrary, statusSlider);
+        })
       }
 
       else {
         tdata.textContent = value;
       }
 
+      // // Create delete button
+      // const tdDelete = document.createElement('td');
+      // const deleteButton = document.createElement('button');
+      // deleteButton.classList = "btn-delete";
+      // deleteButton.addEventListener('click', () => {
+      //   deleteBook();
+      // })
       trow.appendChild(tdata);
     }
 
     tbody.appendChild(trow);
   })
+}
+
+function toggleStatus(id, library, node) {
+  const matchingBook = library.find(book => book.id === id);
+  matchingBook.status = (matchingBook.status === 'read') ? 'unread' : 'read';
+  node.classList.toggle('read');
 }

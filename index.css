@@ -157,6 +157,7 @@ th {
   border: 1px solid grey;
   border-radius: 15px;
   background-color: pink;
+  cursor: pointer;
 }
 
 .slider-indicator {
@@ -174,4 +175,21 @@ th {
 
 .status-slider.read {
   background-color: greenyellow;
+}
+
+.btn-delete {
+  width: 35px;
+  height: 35px;
+  background: url("./assets/images/delete.svg");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background: url("./assets/images/delete-empty.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
 }
