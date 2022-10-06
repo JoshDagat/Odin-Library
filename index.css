@@ -10,46 +10,55 @@
 
 body {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-areas:
-    "sidebar content"
-    "sidebar content";
-  background-color: var(--color-main);
+  position: relative;
 }
 
-.sidebar {
-  grid-area: sidebar;
-  background-color: black;
+/* MODAL */
+
+.add-book-modal {
+  background-color: rgba(0, 0, 0, 0.24);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 15px;
-
-  /* Desktop */
-  position: sticky;
-  top: 0;
-  left: 0;
-  height: 100vh;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
-.sidebar form {
+.add-book-modal form {
   background-color: #Fff;
   padding: 10px;
   border-radius: 10px;
   width: 90%;
+  min-height: 50%;
+  flex: 1;
 }
 
 fieldset {
   border: 1px solid grey;
   padding: 10px;
   border-radius: 5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+.form-radio {
+  display: flex;
+  justify-content: space-around;
+}
+
+.radio-group>input,
+.radio-group>label {
+  cursor: pointer;
 }
 
 legend {
   font-weight: bold;
   margin: 0 auto;
+  font-size: 1.25rem;
 }
 
 .form-input {
@@ -57,16 +66,32 @@ legend {
   flex-direction: column;
 }
 
+.form-input:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
+.form-input>input {
+  font-size: 1.15rem;
+  padding: 5px;
+  border: none;
+  background-color: #d4a373;
+  color: rgba(0, 0, 0, 0.8);
+  padding-left: 8px;
+  border-radius: 5px;
+}
+
 label {
   margin-bottom: 5px;
   font-weight: bold;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
 }
 
 
 input[type="number"] {
   margin-bottom: 20px;
 }
+
+/* Buttons */
 
 .btn-base {
   border: none;
@@ -110,14 +135,12 @@ input[type="number"] {
 }
 
 .table-wrapper {
-  grid-area: content;
   height: 50vh;
   overflow: auto;
 }
 
 .table-wrapper>table {
   margin: 0 auto;
-  grid-column: 1/5;
   width: 100%;
 }
 

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div class="sidebar">
+  <div class="add-book-modal">
     <form action="#" id="new-book">
       <fieldset>
         <legend>New Book:</legend>
@@ -27,10 +27,14 @@
           <input id="pages" name="pages" type="number" required>
         </div>
         <div class="form-radio">
-          <input id="read" name="status" value="read" type="radio">
-          <label for="read">Read</label>
-          <input id="unread" name="status" value="unread" type="radio" checked>
-          <label for="unread">Unread</label>
+          <div class="radio-group">
+            <input id="read" name="status" value="read" type="radio">
+            <label for="read">Read</label>
+          </div>
+          <div class="radio-group">
+            <input id="unread" name="status" value="unread" type="radio" checked>
+            <label for="unread">Unread</label>
+          </div>
         </div>
         <button class="btn-base btn-add" type="submit">
           <span>Add Book</span>
