@@ -31,7 +31,7 @@ function addBookToLibrary() {
     newBook[key] = value;
   }
 
-  // Prepend with id for easy identification in updateTable
+  // Prepend with id for easy identification in renderTable
   newBook.id = `id${nanoid()}`;
   coreLibrary.push(newBook);
 }
@@ -40,7 +40,7 @@ bookForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   addBookToLibrary();
-  updateTable();
+  renderTable();
 })
 
 
@@ -48,20 +48,48 @@ bookForm.addEventListener("submit", (e) => {
  * Takes an array of books and renders it in table format.
  * 
  */
-function updateTable() {
-  const tbody = document.querySelector("#table-body");
-
-  while (tbody.hasChildNodes()) {
-    tbody.removeChild(tbody.lastChild);
+function renderTable() {
+  const tableWrapper = document.querySelector('.table-wrapper');
+  while (tableWrapper.hasChildNodes()) {
+    tableWrapper.removeChild(tableWrapper.firstChild);
   }
 
+  renderDesktopTable();
+  console.log('ran')
+}
+
+
+/**
+ *  Creates a book table for desktop view
+ * */
+function renderDesktopTable() {
+  // Create the table head;
+  const tableHeadersText = [String.fromCharCode(160), 'Status', 'Title', 'Author', 'Pages'];
+
+  const tableHeaders = document.createElement('thead');
+  const tableHeaderRow = document.createElement('tr');
+
+  tableHeadersText.forEach(text => {
+    const tableHead = document.createElement('th');
+    tableHead.textContent = text;
+    tableHead.classList = (text === String.fromCharCode(160) || text === 'Status') ? 'button-th' : 'th-data';
+    tableHeaderRow.appendChild(tableHead);
+  })
+
+  tableHeaders.appendChild(tableHeaderRow);
+
+
+  // create the table body:
+  const tableBody = document.createElement('tbody');
   coreLibrary.forEach(book => {
     // Create the row for this book.
     const trow = document.createElement("tr");
     trow.setAttribute("data-bookId", book.id);
 
+
     // Create delete button
     const tdDelete = document.createElement('td');
+    tdDelete.classList = 'td-delete'
     const deleteButton = document.createElement('button');
     deleteButton.classList = "btn-delete";
     deleteButton.addEventListener('click', () => {
@@ -79,6 +107,7 @@ function updateTable() {
       const tdata = document.createElement("td");
       if (value === 'read' || value === 'unread') {
 
+        tdata.classList = 'td-status'
         // Create a status slider.
         const statusSlider = document.createElement('div')
         const sliderIndicator = document.createElement('div')
@@ -93,13 +122,21 @@ function updateTable() {
       }
 
       else {
+        tdata.classList = 'td-data';
         tdata.textContent = value;
       }
       trow.appendChild(tdata);
     }
 
-    tbody.appendChild(trow);
+    tableBody.appendChild(trow);
   })
+
+  const table = document.createElement('table');
+  table.appendChild(tableHeaders);
+  table.appendChild(tableBody);
+
+  const tableWrapper = document.querySelector('.table-wrapper');
+  tableWrapper.appendChild(table);
 }
 
 /**
@@ -124,5 +161,5 @@ function toggleStatus(id, node) {
 function deleteBook(id) {
   const newLibrary = coreLibrary.filter(book => book.id !== id);
   coreLibrary = newLibrary;
-  updateTable();
+  renderTable();
 }

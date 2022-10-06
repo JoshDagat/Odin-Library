@@ -140,11 +140,13 @@ td {
 th,
 td {
   padding: 16px;
-  min-width: 200px;
+  min-width: 95px;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1.15rem;
+  vertical-align: middle;
 }
+
 
 th {
   background-color: var(--color-accent-1);
@@ -192,4 +194,14 @@ th {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80%;
+}
+
+.button-th {
+  min-width: unset;
+  width: 95px;
+}
+
+.td-data,
+.th-data {
+  max-width: 100px;
 }
