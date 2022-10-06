@@ -45,6 +45,21 @@ fieldset {
   justify-content: center;
 }
 
+@media screen and (min-width: 768px) {
+  .add-book-modal form {
+    flex: unset;
+    width: 50%;
+    min-height: unset;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .add-book-modal form {
+    max-width: 534px;
+  }
+
+}
+
 .form-radio {
   display: flex;
   justify-content: space-around;
