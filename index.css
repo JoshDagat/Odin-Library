@@ -24,6 +24,8 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
+
+  display: none;
 }
 
 .add-book-modal form {
@@ -33,6 +35,7 @@ body {
   width: 90%;
   min-height: 50%;
   flex: 1;
+  display: none;
 }
 
 fieldset {
@@ -149,14 +152,9 @@ input[type="number"] {
   padding: 16px 40px;
 }
 
-.table-wrapper {
-  height: 50vh;
+.books-wrapper {
+  min-height: 100vh;
   overflow: auto;
-}
-
-.table-wrapper>table {
-  margin: 0 auto;
-  width: 100%;
 }
 
 .btn-new-entry {
@@ -164,32 +162,6 @@ input[type="number"] {
   margin: 16px auto 0 0;
 }
 
-table,
-th,
-td {
-  border: 1px solid black;
-}
-
-td {
-  text-align: center;
-  background-color: var(--color-accent-1-lt);
-}
-
-th,
-td {
-  padding: 16px;
-  min-width: 95px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 1.15rem;
-  vertical-align: middle;
-}
-
-
-th {
-  background-color: var(--color-accent-1);
-  font-weight: bold;
-}
 
 .status-slider {
   width: 50px;
@@ -234,12 +206,46 @@ th {
   background-size: 80%;
 }
 
-.button-th {
-  min-width: unset;
-  width: 95px;
+
+.book {
+  background-color: #fff;
+  max-width: min(80%, 300px);
+  border-radius: 15px;
+  padding: 16px 16px 5px;
+  position: relative;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 2px;
+  margin-left: 2px;
 }
 
-.td-data,
-.th-data {
-  max-width: 100px;
+.book>.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.book>.author {
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.book>span {
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.book>.status-slider {
+  margin-left: auto;
+}
+
+.book>.action-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.book .btn-delete {
+  margin-left: -11px;
 }
