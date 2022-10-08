@@ -13,6 +13,159 @@ body {
   position: relative;
 }
 
+/* HEADER */
+
+header {
+  min-height: 100px;
+  background-color: #023047;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  /* display: grid; */
+  /* grid-template-columns: 350px 1fr; */
+  /* grid-template-areas: "h1 search-actions"; */
+}
+
+header>h1 {
+  font-size: 3rem;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 16px;
+  /* margin-left: 32px; */
+  /* margin-right: auto; */
+  /* grid-area: h1; */
+}
+
+header>.action-group {
+  display: flex;
+  gap: 5px;
+  /* margin-right: 52px; */
+  grid-area: search-actions;
+  /* display: grid; */
+  /* grid-template-columns: 80% 1fr 1fr; */
+  /* grid-template-areas: "search button1 button2"; */
+}
+
+header>.action-group>* {
+  flex: 1;
+}
+
+header>.action-group>input {
+  border-radius: 2px;
+  width: 80%;
+  justify-self: center;
+  grid-area: search;
+  flex: 3;
+}
+
+header>.action-group>button:first-of-type {
+  grid-area: button1;
+}
+
+header>.action-group>button:last-of-type {
+  grid-area: button2;
+}
+
+/* Content */
+
+.books-wrapper {
+  padding: 16px 15px;
+}
+
+.btn-new-entry {
+  max-width: 200px;
+  margin: 16px auto 0 0;
+}
+
+
+.status-slider {
+  width: 50px;
+  height: 25px;
+  border: 1px solid grey;
+  border-radius: 15px;
+  background-color: pink;
+  cursor: pointer;
+}
+
+.slider-indicator {
+  width: 23px;
+  height: 23px;
+  background-color: black;
+  border: 1px solid lightgrey;
+  border-radius: 100%;
+  transition: margin-left 0.25s ease-in-out;
+}
+
+.status-slider.read .slider-indicator {
+  margin-left: 50%;
+}
+
+.status-slider.read {
+  background-color: greenyellow;
+}
+
+.btn-delete {
+  width: 35px;
+  height: 35px;
+  background: url("./assets/images/delete.svg");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background: url("./assets/images/delete-empty.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+}
+
+
+.book {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 15px;
+  padding: 16px 16px 5px;
+  position: relative;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 2px;
+  margin-left: 2px;
+}
+
+.book>.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.book>.author {
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.book>span {
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.book>.status-slider {
+  margin-left: auto;
+}
+
+.book>.action-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.book .btn-delete {
+  margin-left: -11px;
+}
+
 /* MODAL */
 
 .add-book-modal {
@@ -20,12 +173,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px;
   position: absolute;
+  /* bottom: 0; */
+  /* left: 0; */
   width: 100%;
-  height: 100%;
+  height: 0%;
+  max-height: 0;
+  z-index: 5;
+  bottom: 0;
+  left: 0;
 
-  display: none;
+  display: hidden;
+  transition: height 0.5s ease-in-out;
+}
+
+.add-book-modal.active {
+  height: 100%;
+  max-height: 100vh;
+  display: flex;
+  padding: 0 16px;
 }
 
 .add-book-modal form {
@@ -35,7 +201,14 @@ body {
   width: 90%;
   min-height: 50%;
   flex: 1;
-  display: none;
+  margin-top: 100%;
+  transition: margin-top 1.05s ease-in-out;
+}
+
+.add-book-modal.active form {
+  display: block;
+  visibility: visible;
+  margin-top: 0%;
 }
 
 fieldset {
@@ -116,17 +289,15 @@ input[type="number"] {
 }
 
 .btn-add {
-  background: rgb(234, 88, 12);
-  background: linear-gradient(45deg,
+  background: linear-gradient(rgb(234, 88, 12),
       rgba(234, 88, 12, 1) 0%,
       rgba(255, 168, 0, 1) 35%,
       rgba(234, 88, 12, 1) 100%);
   display: flex;
-  width: 80%;
+  /* width: 80%; */
   align-items: center;
   justify-content: space-around;
-  margin: 24px auto 5px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   padding: 10px;
   cursor: pointer;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
@@ -144,108 +315,4 @@ input[type="number"] {
 .btn-add img {
   width: 25px;
   height: 25px;
-}
-
-/* Content */
-
-.content {
-  padding: 16px 40px;
-}
-
-.books-wrapper {
-  min-height: 100vh;
-  overflow: auto;
-}
-
-.btn-new-entry {
-  max-width: 200px;
-  margin: 16px auto 0 0;
-}
-
-
-.status-slider {
-  width: 50px;
-  height: 25px;
-  border: 1px solid grey;
-  border-radius: 15px;
-  background-color: pink;
-  cursor: pointer;
-}
-
-.slider-indicator {
-  width: 23px;
-  height: 23px;
-  background-color: black;
-  border: 1px solid lightgrey;
-  border-radius: 100%;
-  transition: margin-left 0.25s ease-in-out;
-}
-
-.status-slider.read .slider-indicator {
-  margin-left: 50%;
-}
-
-.status-slider.read {
-  background-color: greenyellow;
-}
-
-.btn-delete {
-  width: 35px;
-  height: 35px;
-  background: url("./assets/images/delete.svg");
-  background-size: 80%;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-}
-
-.btn-delete:hover {
-  background: url("./assets/images/delete-empty.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 80%;
-}
-
-
-.book {
-  background-color: #fff;
-  max-width: min(80%, 300px);
-  border-radius: 15px;
-  padding: 16px 16px 5px;
-  position: relative;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-  margin-top: 2px;
-  margin-left: 2px;
-}
-
-.book>.title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.book>.author {
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.book>span {
-  margin-bottom: 15px;
-  display: inline-block;
-}
-
-.book>.status-slider {
-  margin-left: auto;
-}
-
-.book>.action-group {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.book .btn-delete {
-  margin-left: -11px;
 }

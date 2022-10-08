@@ -10,6 +10,30 @@
 </head>
 
 <body>
+  <header>
+    <h1>Reading List</h1>
+    <div class="action-group">
+      <input type="search">
+      <button class="btn-base header-btn-search" type="button">Search</button>
+      <button class="btn-base header-btn-add">Add Book</button>
+    </div>
+  </header>
+  <main class="content">
+    <div class="books-wrapper">
+      <div class="book">
+        <p class="title">The Chronicles of Narnia</p>
+        <p class="author">by CS Lewis</p>
+        <span>555 pages</span>
+        <div class="action-group">
+          <button class="btn-base btn-delete">
+          </button>
+          <div class="status-slider">
+            <div class="slider-indicator read"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
   <div class="add-book-modal">
     <form action="#" id="new-book">
       <fieldset>
@@ -43,23 +67,6 @@
       </fieldset>
     </form>
   </div>
-  <main class="content">
-    <h1>My Reading List</h1>
-    <div class="books-wrapper">
-      <div class="book">
-        <p class="title">The Chronicles of Narnia</p>
-        <p class="author">by CS Lewis</p>
-        <span>555 pages</span>
-        <div class="action-group">
-          <button class="btn-base btn-delete">
-          </button>
-          <div class="status-slider">
-            <div class="slider-indicator read"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
   <script type="module" src="./index.js"></script>
 </body>
 

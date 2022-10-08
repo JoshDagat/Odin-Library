@@ -89,3 +89,11 @@ function deleteBook(id) {
   coreLibrary = newLibrary;
   renderTable();
 }
+
+const addBookModalBtn = document.querySelector(".header-btn-add");
+addBookModalBtn.addEventListener('click', showAddBookModal)
+function showAddBookModal() {
+  const addBookModal = document.querySelector('.add-book-modal');
+  addBookModal.classList.add("active")
+  console.log('clicked')
+}
