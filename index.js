@@ -12,7 +12,8 @@ const bookForm = document.querySelector("#new-book");
  * @param {string} status
 */
 
-function Book(title, author, pages, status) {
+function Book(title, author, pages, status, id) {
+  this.id = id;
   this.status = status;
   this.title = title;
   this.author = author;
@@ -41,6 +42,7 @@ bookForm.addEventListener("submit", (e) => {
 
   addBookToLibrary();
   renderTable();
+  toggleAddBookModal();
 })
 
 
@@ -49,12 +51,12 @@ bookForm.addEventListener("submit", (e) => {
  * 
  */
 function renderTable() {
-  const tableWrapper = document.querySelector('.table-wrapper');
-  while (tableWrapper.hasChildNodes()) {
-    tableWrapper.removeChild(tableWrapper.firstChild);
+  const booksWrapper = document.querySelector('.books-wrapper');
+  while (booksWrapper.hasChildNodes()) {
+    booksWrapper.removeChild(booksWrapper.firstChild);
   }
 
-  renderDesktopTable();
+  renderBooks();
   console.log('ran')
 }
 
@@ -63,6 +65,54 @@ function renderTable() {
  *  Creates a book table for desktop view
  * */
 function renderBooks() {
+  let temp = [...coreLibrary];
+  temp.reverse().forEach(book => {
+    const bookDiv = document.createElement('div');
+    bookDiv.classList = 'book';
+
+    const title = document.createElement('p');
+    title.classList = 'title';
+    title.textContent = book.title;
+    bookDiv.appendChild(title);
+
+    const author = document.createElement('p');
+    author.classList = 'author';
+    author.textContent = `by ${book.author}`;
+    bookDiv.appendChild(author);
+
+    const pages = document.createElement('span');
+    pages.textContent = book.pages;
+    bookDiv.appendChild(pages);
+
+    // Create delete button:
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList = 'btn-base btn-delete';
+    deleteBtn.addEventListener('click', () => {
+      deleteBook(book.id);
+    })
+
+    // Create status slider:
+    const statusSlider = document.createElement('div');
+    const sliderIndicator = document.createElement('div');
+    statusSlider.classList = `status-slider ${book.stats === 'read' ? 'read' : ''}`;
+    sliderIndicator.classList = `slider-indicator`;
+    statusSlider.appendChild(sliderIndicator);
+
+    statusSlider.addEventListener('click', () => {
+      toggleStatus(book.id, statusSlider);
+    })
+
+    // Create action group;
+    const actionGroup = document.createElement('div');
+    actionGroup.classList = 'action-group';
+    actionGroup.appendChild(deleteBtn);
+    actionGroup.appendChild(statusSlider);
+    bookDiv.appendChild(actionGroup);
+
+    // Attach to book wrapper:
+    const booksWrapper = document.querySelector('.books-wrapper');
+    booksWrapper.appendChild(bookDiv);
+  })
 }
 
 /**
@@ -91,9 +141,8 @@ function deleteBook(id) {
 }
 
 const addBookModalBtn = document.querySelector(".header-btn-add");
-addBookModalBtn.addEventListener('click', showAddBookModal)
-function showAddBookModal() {
+addBookModalBtn.addEventListener('click', toggleAddBookModal)
+function toggleAddBookModal() {
   const addBookModal = document.querySelector('.add-book-modal');
-  addBookModal.classList.add("active")
-  console.log('clicked')
+  addBookModal.classList.toggle("active")
 }
