@@ -37,9 +37,6 @@ function addBookToLibrary() {
   coreLibrary.push(newBook);
 }
 
-
-
-
 /**
  * Takes an array of books and renders it in table format.
  * 
@@ -60,6 +57,7 @@ function renderTable(library) {
 function renderBooks(library) {
   let temp = [...library];
   const booksWrapper = document.querySelector('.books-wrapper');
+  let index = 1;
 
 
   if (!temp.length) {
@@ -81,7 +79,7 @@ function renderBooks(library) {
   else {
     temp.reverse().forEach(book => {
       const bookDiv = document.createElement('div');
-      bookDiv.classList = 'book';
+      bookDiv.classList = `book accent-${(index === 11) ? index = 1 : index++}`;
 
       const title = document.createElement('p');
       title.classList = 'title';

@@ -2,6 +2,7 @@
 
 :root {
   --color-main: #023047;
+  --color-red: red;
   --color-grey: grey;
   --color-lt-grey: lightgrey;
   --color-read: greenyellow;
@@ -20,11 +21,16 @@
   --color-accent-3-lt: #219ebc;
   --shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
   --shadow-2: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
-  --book-accent-1: #8ecae6;
-  --book-accent-2: #219ebc;
-  --book-accent-3: #023047;
-  --book-accent-4: #ffb703;
-  --book-accent-5: #fb8500;
+  --book-accent-1: #001219;
+  --book-accent-2: #9b2226;
+  --book-accent-3: #005f73;
+  --book-accent-4: #ae2012;
+  --book-accent-5: #0a9396;
+  --book-accent-6: #bb3e03;
+  --book-accent-7: #94d2bd;
+  --book-accent-8: #ca6702;
+  --book-accent-9: #e9d8a6;
+  --book-accent-10: #ee9b00;
 }
 
 body {
@@ -166,6 +172,51 @@ header>* {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }
+
+.book.empty::before {
+  background: var(--color-red);
+}
+
+.book.accent-1::before {
+  background-color: var(--book-accent-1);
+}
+
+.book.accent-2::before {
+  background-color: var(--book-accent-2);
+}
+
+.book.accent-3::before {
+  background-color: var(--book-accent-3);
+}
+
+.book.accent-4::before {
+  background-color: var(--book-accent-4);
+}
+
+.book.accent-5::before {
+  background-color: var(--book-accent-5);
+}
+
+.book.accent-6::before {
+  background-color: var(--book-accent-6);
+}
+
+.book.accent-7::before {
+  background-color: var(--book-accent-7);
+}
+
+.book.accent-8::before {
+  background-color: var(--book-accent-8);
+}
+
+.book.accent-9::before {
+  background-color: var(--book-accent-9);
+}
+
+.book.accent-10::before {
+  background-color: var(--book-accent-10);
+}
+
 
 .book>.title {
   font-size: 1.25rem;
