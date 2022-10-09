@@ -2,11 +2,29 @@
 
 :root {
   --color-main: #023047;
+  --color-grey: grey;
+  --color-lt-grey: lightgrey;
+  --color-read: greenyellow;
+  --color-unread: pink;
+  --color-black: black;
+  --color-text: #292524;
+  --color-faded-black-25: rgba(0, 0, 0, 0.25);
+  --color-faded-black-80: rgba(0, 0, 0, 0.8);
   --color-white: #fff;
-  --color-accent-1: #d4a373;
-  --color-accent-1-lt: #faedcd;
-  --color-accent-2: #ccd5ae;
-  --color-accent-2-lt: #e9edc9;
+  --color-accent-1: #219ebcaa;
+  --color-accent-1-lt: #219ebc55;
+  --color-accent-2: #fb8500;
+  --color-accent-2-lt: #ffb703;
+  --color-accent-2-hover: #e6a502;
+  --color-accent-3: #069abe;
+  --color-accent-3-lt: #219ebc;
+  --shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  --shadow-2: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
+  --book-accent-1: #8ecae6;
+  --book-accent-2: #219ebc;
+  --book-accent-3: #023047;
+  --book-accent-4: #ffb703;
+  --book-accent-5: #fb8500;
 }
 
 body {
@@ -106,9 +124,9 @@ header>* {
   border-radius: 15px;
   padding: 16px 16px 5px;
   position: relative;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow);
+  -webkit-box-shadow: var(--shadow);
+  -moz-box-shadow: var(--shadow);
   margin-top: 2px;
   margin-left: 2px;
 }
@@ -135,6 +153,18 @@ header>* {
   background-position: center;
   border-radius: 50%;
   margin-bottom: 10px;
+}
+
+.book::before {
+  content: '';
+  background: red;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .book>.title {
@@ -178,17 +208,17 @@ header>* {
 .status-slider {
   width: 50px;
   height: 25px;
-  border: 1px solid grey;
+  border: 1px solid var(--color-grey);
   border-radius: 15px;
-  background-color: pink;
+  background-color: var(--color-unread);
   cursor: pointer;
 }
 
 .slider-indicator {
   width: 23px;
   height: 23px;
-  background-color: black;
-  border: 1px solid lightgrey;
+  background-color: var(--color-black);
+  border: 1px solid var(--color-lt-grey);
   border-radius: 100%;
   transition: margin-left 0.25s ease-in-out;
 }
@@ -198,13 +228,13 @@ header>* {
 }
 
 .status-slider.read {
-  background-color: greenyellow;
+  background-color: var(--color-read);
 }
 
 /* MODAL */
 
 .add-book-modal {
-  background-color: rgba(0, 0, 0, 0.24);
+  background-color: var(--color-faded-black-25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,7 +258,7 @@ header>* {
 }
 
 .add-book-modal form {
-  background-color: #Fff;
+  background-color: var(--color-white);
   padding: 10px;
   border-radius: 10px;
   width: 90%;
@@ -256,7 +286,7 @@ header>* {
 }
 
 fieldset {
-  border: 1px solid grey;
+  border: 1px solid var(--color-grey);
   padding: 10px;
   border-radius: 5px;
   height: 100%;
@@ -313,15 +343,15 @@ legend {
   font-size: 1.15rem;
   padding: 5px;
   border: none;
-  background-color: #219ebc55;
+  background-color: var(--color-accent-1-lt);
   ;
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--color-faded-black-80);
   padding-left: 8px;
   border-radius: 5px;
 }
 
 .form-input>input:focus {
-  background-color: #219ebcaa;
+  background-color: var(--color-accent-1);
 }
 
 label {
@@ -348,13 +378,13 @@ input[type="number"] {
   font-weight: bold;
   text-transform: uppercase;
   font-size: 0.8rem;
-  background-color: #fb8500;
+  background-color: var(--color-accent-2);
   cursor: pointer;
 }
 
 .header-btn-add:hover,
 .header-btn-search:hover {
-  background-color: #ffb703;
+  background-color: var(--color-accent-2-lt);
 }
 
 .add-book-modal .btn-confirm,
@@ -365,28 +395,28 @@ input[type="number"] {
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
-  -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
-  -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: var(--shadow-2);
+  -webkit-box-shadow: var(--shadow-2);
+  -moz-box-shadow: var(--shadow-2);
 }
 
 .add-book-modal .btn-confirm {
-  background: #219ebc;
+  background: var(--color-accent-3-lt);
   flex: 1;
 }
 
 .add-book-modal .btn-confirm:hover {
-  background-color: #069abe;
+  background-color: var(--color-accent-3);
 }
 
 .add-book-modal .btn-close {
   width: 50px;
   border-radius: 5px;
-  background-color: #ffb703;
+  background-color: var(--color-accent-2-lt);
 }
 
 .add-book-modal .btn-close:hover {
-  background-color: #e6a502;
+  background-color: var(--color-accent-2-hover);
 }
 
 .btn-close>img {
@@ -397,7 +427,7 @@ input[type="number"] {
   font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: #292524;
+  color: var(--color-text);
   margin-right: 35px;
 }
 
