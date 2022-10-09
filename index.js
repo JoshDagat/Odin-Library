@@ -51,7 +51,6 @@ function renderTable(library) {
   }
 
   renderBooks(library);
-  console.log('ran')
 }
 
 
@@ -139,7 +138,7 @@ const closeModal = document.querySelector('.btn-close');
 closeModal.addEventListener('click', toggleAddBookModal);
 
 const search = document.querySelector('header input');
-search.addEventListener('change', filterSearch)
+search.addEventListener('input', filterSearch)
 
 // Helpers
 /**
@@ -177,7 +176,11 @@ function deleteBook(id) {
 }
 
 function filterSearch() {
-  let filteredBooks = coreLibrary.filter(books => books === search.value);
+  let filteredBooks;
+  if (search.value === '') {
+    filteredBooks = coreLibrary;
+  }
+  filteredBooks = coreLibrary.filter(book => book.title.includes(search.value));
   renderTable(filteredBooks);
 }
 
