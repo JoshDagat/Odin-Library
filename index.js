@@ -63,8 +63,18 @@ function renderBooks(library) {
 
 
   if (!temp.length) {
+    const doge = document.createElement('div');
+    doge.classList = 'doge';
+
     const empty = document.createElement('div');
     empty.classList = 'book empty';
+    empty.appendChild(doge);
+
+
+    const dogeText = document.createElement('p');
+    dogeText.textContent = "Wow, such empty..."
+    empty.appendChild(dogeText)
+
     booksWrapper.appendChild(empty)
   }
 

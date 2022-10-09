@@ -85,7 +85,6 @@ header>* {
 
 /* Content */
 
-
 .books-wrapper {
   padding: 16px 15px;
   display: grid;
@@ -116,11 +115,26 @@ header>* {
 
 .book.empty {
   aspect-ratio: 2/1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.book.empty p {
+  font-weight: bold;
+}
+
+.doge {
+  aspect-ratio: 1/1;
+  width: 50%;
   background-image: url('./assets/images/doge.jpg');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
 .book>.title {
