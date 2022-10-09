@@ -37,13 +37,7 @@ function addBookToLibrary() {
   coreLibrary.push(newBook);
 }
 
-bookForm.addEventListener("submit", (e) => {
-  e.preventDefault();
 
-  addBookToLibrary();
-  renderTable();
-  toggleAddBookModal();
-})
 
 
 /**
@@ -150,11 +144,32 @@ function deleteBook(id) {
   renderTable();
 }
 
+// Event Listeners:
 const addBookModalBtn = document.querySelector(".header-btn-add");
 addBookModalBtn.addEventListener('click', toggleAddBookModal)
+
+
+bookForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  addBookToLibrary();
+  renderTable();
+  toggleAddBookModal();
+  bookForm.querySelector('#title').value = '';
+  bookForm.querySelector('#author').value = '';
+  bookForm.querySelector('#pages').value = '';
+})
+
+const closeModal = document.querySelector('.btn-close');
+closeModal.addEventListener('click', toggleAddBookModal);
+
+
+// Helpers
 function toggleAddBookModal() {
   const addBookModal = document.querySelector('.add-book-modal');
   addBookModal.classList.toggle("active")
 }
 
+
+// Initial population
 renderBooks();
