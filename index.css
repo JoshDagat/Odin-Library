@@ -136,8 +136,6 @@ header>.action-group>button:last-of-type {
   justify-content: space-between;
 }
 
-
-
 .status-slider {
   width: 50px;
   height: 25px;
@@ -164,10 +162,6 @@ header>.action-group>button:last-of-type {
   background-color: greenyellow;
 }
 
-
-
-
-
 /* MODAL */
 
 .add-book-modal {
@@ -176,8 +170,6 @@ header>.action-group>button:last-of-type {
   align-items: center;
   justify-content: center;
   position: absolute;
-  /* bottom: 0; */
-  /* left: 0; */
   width: 100%;
   height: 0%;
   max-height: 0;
@@ -216,7 +208,12 @@ header>.action-group>button:last-of-type {
   display: flex;
   visibility: visible;
   transform: translateY(0);
+}
 
+.add-book-modal .action-group {
+  display: flex;
+  gap: 5px;
+  justify-content: space-around
 }
 
 fieldset {
@@ -277,10 +274,15 @@ legend {
   font-size: 1.15rem;
   padding: 5px;
   border: none;
-  background-color: #d4a373;
+  background-color: #219ebc55;
+  ;
   color: rgba(0, 0, 0, 0.8);
   padding-left: 8px;
   border-radius: 5px;
+}
+
+.form-input>input:focus {
+  background-color: #219ebcaa;
 }
 
 label {
@@ -300,15 +302,27 @@ input[type="number"] {
   border: none;
 }
 
-.add-book-modal .btn-add {
-  background: linear-gradient(rgb(234, 88, 12),
-      rgba(234, 88, 12, 1) 0%,
-      rgba(255, 168, 0, 1) 35%,
-      rgba(234, 88, 12, 1) 100%);
+.header-btn-add,
+.header-btn-search {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  background-color: #fb8500;
+  cursor: pointer;
+}
+
+.header-btn-add:hover,
+.header-btn-search:hover {
+  background-color: #ffb703;
+}
+
+.add-book-modal .btn-confirm,
+.add-book-modal .btn-close {
   display: flex;
-  /* width: 80%; */
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
@@ -317,24 +331,44 @@ input[type="number"] {
   -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.24);
 }
 
-.btn-add span {
+.add-book-modal .btn-confirm {
+  background: #219ebc;
+  flex: 1;
+}
+
+.add-book-modal .btn-confirm:hover {
+  background-color: #069abe;
+}
+
+.add-book-modal .btn-close {
+  width: 50px;
+  border-radius: 5px;
+  background-color: #ffb703;
+}
+
+.add-book-modal .btn-close:hover {
+  background-color: #e6a502;
+}
+
+.btn-close>img {
+  width: 100%;
+}
+
+.btn-confirm>span {
   font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
   color: #292524;
+  margin-right: 35px;
 }
 
-.btn-add img {
+.btn-confirm>img {
   width: 25px;
   height: 25px;
 }
 
-.btn-new-entry {
-  max-width: 200px;
-  margin: 16px auto 0 0;
-}
 
-.btn-delete {
+.book .btn-delete {
   width: 35px;
   height: 35px;
   background: url("./assets/images/delete.svg");
@@ -342,15 +376,12 @@ input[type="number"] {
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
+  margin-left: -11px;
 }
 
-.btn-delete:hover {
+.book .btn-delete:hover {
   background: url("./assets/images/delete-empty.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80%;
-}
-
-.book .btn-delete {
-  margin-left: -11px;
 }
