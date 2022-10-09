@@ -81,19 +81,18 @@ function renderBooks(library) {
       const bookDiv = document.createElement('div');
       bookDiv.classList = `book accent-${(index === 11) ? index = 1 : index++}`;
 
+      // Create title and attach to bookDiv (1st child):
       const title = document.createElement('p');
       title.classList = 'title';
       title.textContent = book.title;
       bookDiv.appendChild(title);
 
+      // Create author and attach to bookDiv (2nd child):
       const author = document.createElement('p');
       author.classList = 'author';
       author.textContent = `by ${book.author}`;
       bookDiv.appendChild(author);
 
-      const pages = document.createElement('span');
-      pages.textContent = book.pages;
-      bookDiv.appendChild(pages);
 
       // Create delete button:
       const deleteBtn = document.createElement('button');
@@ -113,12 +112,23 @@ function renderBooks(library) {
         toggleStatus(book.id, statusSlider);
       })
 
-      // Create action group;
+      // Create action group and append delete + status slider:
       const actionGroup = document.createElement('div');
       actionGroup.classList = 'action-group';
       actionGroup.appendChild(deleteBtn);
       actionGroup.appendChild(statusSlider);
-      bookDiv.appendChild(actionGroup);
+
+      // Create pages and append to bookFooter
+      const pages = document.createElement('span');
+      pages.textContent = `${book.pages} pages`;
+
+
+      // Create bookFooter and append to bookDiv (3rd child);
+      const bookFooter = document.createElement('div');
+      bookFooter.classList = 'bookFooter';
+      bookFooter.appendChild(pages)
+      bookFooter.appendChild(actionGroup)
+      bookDiv.appendChild(bookFooter)
 
       // Attach to book wrapper:
       booksWrapper.appendChild(bookDiv);

@@ -135,6 +135,9 @@ header>* {
   -moz-box-shadow: var(--shadow);
   margin-top: 2px;
   margin-left: 2px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .book.empty {
@@ -226,12 +229,8 @@ header>* {
 
 .book>.author {
   font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.book>span {
-  margin-bottom: 15px;
-  display: inline-block;
+  margin-bottom: auto;
+  flex: 1;
 }
 
 @media screen and (min-width: 1078px) {
@@ -246,11 +245,16 @@ header>* {
   }
 }
 
-.book>.status-slider {
+.book>.bookFooter>span {
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.book>.bookFooter>.status-slider {
   margin-left: auto;
 }
 
-.book>.action-group {
+.book>.bookFooter>.action-group {
   display: flex;
   align-items: center;
   justify-content: space-between;
