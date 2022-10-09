@@ -44,13 +44,13 @@ function addBookToLibrary() {
  * Takes an array of books and renders it in table format.
  * 
  */
-function renderTable() {
+function renderTable(library) {
   const booksWrapper = document.querySelector('.books-wrapper');
   while (booksWrapper.hasChildNodes()) {
     booksWrapper.removeChild(booksWrapper.firstChild);
   }
 
-  renderBooks();
+  renderBooks(library);
   console.log('ran')
 }
 
@@ -58,15 +58,15 @@ function renderTable() {
 /**
  *  Creates a book table for desktop view
  * */
-function renderBooks() {
-  let temp = [...coreLibrary];
+function renderBooks(library) {
+  let temp = [...library];
   const booksWrapper = document.querySelector('.books-wrapper');
 
 
   if (!temp.length) {
     const empty = document.createElement('div');
-    empty.textContent = 'Add a book to your read list...'
-    // booksWrapper.appendChild(empty)
+    empty.classList = 'book empty';
+    booksWrapper.appendChild(empty)
   }
 
   else {
@@ -98,7 +98,7 @@ function renderBooks() {
       // Create status slider:
       const statusSlider = document.createElement('div');
       const sliderIndicator = document.createElement('div');
-      statusSlider.classList = `status-slider ${book.stats === 'read' ? 'read' : ''}`;
+      statusSlider.classList = `status-slider ${book.status === 'read' ? 'read' : ''}`;
       sliderIndicator.classList = `slider-indicator`;
       statusSlider.appendChild(sliderIndicator);
 
@@ -118,6 +118,38 @@ function renderBooks() {
     })
   }
 }
+
+// Event Listeners:
+const addBookModalBtn = document.querySelector(".header-btn-add");
+addBookModalBtn.addEventListener('click', toggleAddBookModal)
+
+
+bookForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  addBookToLibrary();
+  renderTable(coreLibrary);
+  toggleAddBookModal();
+  bookForm.querySelector('#title').value = '';
+  bookForm.querySelector('#author').value = '';
+  bookForm.querySelector('#pages').value = '';
+})
+
+const closeModal = document.querySelector('.btn-close');
+closeModal.addEventListener('click', toggleAddBookModal);
+
+const search = document.querySelector('header input');
+search.addEventListener('change', filterSearch)
+
+// Helpers
+/**
+ * Toggles the add book form's visibility.
+ * */
+function toggleAddBookModal() {
+  const addBookModal = document.querySelector('.add-book-modal');
+  addBookModal.classList.toggle("active")
+}
+
 
 /**
  *  Toggles the book's read/unread status in the coreLibrary.
@@ -141,35 +173,13 @@ function toggleStatus(id, node) {
 function deleteBook(id) {
   const newLibrary = coreLibrary.filter(book => book.id !== id);
   coreLibrary = newLibrary;
-  renderTable();
+  renderTable(coreLibrary);
 }
 
-// Event Listeners:
-const addBookModalBtn = document.querySelector(".header-btn-add");
-addBookModalBtn.addEventListener('click', toggleAddBookModal)
-
-
-bookForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  addBookToLibrary();
-  renderTable();
-  toggleAddBookModal();
-  bookForm.querySelector('#title').value = '';
-  bookForm.querySelector('#author').value = '';
-  bookForm.querySelector('#pages').value = '';
-})
-
-const closeModal = document.querySelector('.btn-close');
-closeModal.addEventListener('click', toggleAddBookModal);
-
-
-// Helpers
-function toggleAddBookModal() {
-  const addBookModal = document.querySelector('.add-book-modal');
-  addBookModal.classList.toggle("active")
+function filterSearch() {
+  let filteredBooks = coreLibrary.filter(books => books === search.value);
+  renderTable(filteredBooks);
 }
-
 
 // Initial population
-renderBooks();
+renderBooks(coreLibrary);

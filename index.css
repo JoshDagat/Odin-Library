@@ -115,6 +115,15 @@ header>* {
   margin-left: 2px;
 }
 
+.book.empty {
+  aspect-ratio: 2/1;
+  background-image: url('./assets/images/doge.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+
 .book>.title {
   font-size: 1.25rem;
   font-weight: bold;
