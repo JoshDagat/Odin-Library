@@ -72,7 +72,7 @@ function renderBooks() {
   if (!temp.length) {
     const empty = document.createElement('div');
     empty.textContent = 'Add a book to your read list...'
-    booksWrapper.appendChild(empty)
+    // booksWrapper.appendChild(empty)
   }
 
   else {
