@@ -66,53 +66,63 @@ function renderTable() {
  * */
 function renderBooks() {
   let temp = [...coreLibrary];
-  temp.reverse().forEach(book => {
-    const bookDiv = document.createElement('div');
-    bookDiv.classList = 'book';
+  const booksWrapper = document.querySelector('.books-wrapper');
 
-    const title = document.createElement('p');
-    title.classList = 'title';
-    title.textContent = book.title;
-    bookDiv.appendChild(title);
 
-    const author = document.createElement('p');
-    author.classList = 'author';
-    author.textContent = `by ${book.author}`;
-    bookDiv.appendChild(author);
+  if (!temp.length) {
+    const empty = document.createElement('div');
+    empty.textContent = 'Add a book to your read list...'
+    booksWrapper.appendChild(empty)
+  }
 
-    const pages = document.createElement('span');
-    pages.textContent = book.pages;
-    bookDiv.appendChild(pages);
+  else {
+    temp.reverse().forEach(book => {
+      const bookDiv = document.createElement('div');
+      bookDiv.classList = 'book';
 
-    // Create delete button:
-    const deleteBtn = document.createElement('button');
-    deleteBtn.classList = 'btn-base btn-delete';
-    deleteBtn.addEventListener('click', () => {
-      deleteBook(book.id);
+      const title = document.createElement('p');
+      title.classList = 'title';
+      title.textContent = book.title;
+      bookDiv.appendChild(title);
+
+      const author = document.createElement('p');
+      author.classList = 'author';
+      author.textContent = `by ${book.author}`;
+      bookDiv.appendChild(author);
+
+      const pages = document.createElement('span');
+      pages.textContent = book.pages;
+      bookDiv.appendChild(pages);
+
+      // Create delete button:
+      const deleteBtn = document.createElement('button');
+      deleteBtn.classList = 'btn-base btn-delete';
+      deleteBtn.addEventListener('click', () => {
+        deleteBook(book.id);
+      })
+
+      // Create status slider:
+      const statusSlider = document.createElement('div');
+      const sliderIndicator = document.createElement('div');
+      statusSlider.classList = `status-slider ${book.stats === 'read' ? 'read' : ''}`;
+      sliderIndicator.classList = `slider-indicator`;
+      statusSlider.appendChild(sliderIndicator);
+
+      statusSlider.addEventListener('click', () => {
+        toggleStatus(book.id, statusSlider);
+      })
+
+      // Create action group;
+      const actionGroup = document.createElement('div');
+      actionGroup.classList = 'action-group';
+      actionGroup.appendChild(deleteBtn);
+      actionGroup.appendChild(statusSlider);
+      bookDiv.appendChild(actionGroup);
+
+      // Attach to book wrapper:
+      booksWrapper.appendChild(bookDiv);
     })
-
-    // Create status slider:
-    const statusSlider = document.createElement('div');
-    const sliderIndicator = document.createElement('div');
-    statusSlider.classList = `status-slider ${book.stats === 'read' ? 'read' : ''}`;
-    sliderIndicator.classList = `slider-indicator`;
-    statusSlider.appendChild(sliderIndicator);
-
-    statusSlider.addEventListener('click', () => {
-      toggleStatus(book.id, statusSlider);
-    })
-
-    // Create action group;
-    const actionGroup = document.createElement('div');
-    actionGroup.classList = 'action-group';
-    actionGroup.appendChild(deleteBtn);
-    actionGroup.appendChild(statusSlider);
-    bookDiv.appendChild(actionGroup);
-
-    // Attach to book wrapper:
-    const booksWrapper = document.querySelector('.books-wrapper');
-    booksWrapper.appendChild(bookDiv);
-  })
+  }
 }
 
 /**
@@ -146,3 +156,5 @@ function toggleAddBookModal() {
   const addBookModal = document.querySelector('.add-book-modal');
   addBookModal.classList.toggle("active")
 }
+
+renderBooks();
